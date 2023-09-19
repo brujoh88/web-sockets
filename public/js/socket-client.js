@@ -5,15 +5,19 @@ const btnEnviar = document.querySelector("#btnEnviar");
 const socket = io();
 
 socket.on("connect", () => {
-  console.log("Conectado");
+  //console.log("Conectado");
   lblOnline.style.display = "";
   lblOffline.style.display = "none";
 });
 
 socket.on("disconnect", () => {
-  console.log("Desconectado del servidor");
+  //console.log("Desconectado del servidor");
   lblOnline.style.display = "none";
   lblOffline.style.display = "";
+});
+
+socket.on("enviar-mensaje-server", (payload) => {
+  console.log(payload);
 });
 btnEnviar.addEventListener("click", () => {
   const mensaje = txtMensaje.value;

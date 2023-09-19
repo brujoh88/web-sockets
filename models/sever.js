@@ -34,19 +34,21 @@ class Server {
 
   sockets() {
     this.io.on("connection", (socket) => {
-      console.log("Cliente conectado");
       socket.on("disconnect", () => {
         console.log("cliente desconectado");
       });
       socket.on("enviar-mensaje", (payload) => {
-        console.log(payload);
+        this.io.emit("enviar-mensaje-server", payload);
       });
     });
   }
 
   listen() {
     this.server.listen(this.port, () => {
-      console.log("Servidor corriendo en puerto", this.port);
+      console.log(
+        "Servidor corriendo en puerto",
+        `http://localhost:${this.port}/`
+      );
     });
   }
 }
